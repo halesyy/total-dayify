@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link href='src/main.css' rel='stylesheet' type='text/css'>
+		<meta name="viewport" content="width=device-width" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Tinkernut</title>
+		<!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
+		<!-- <script type="text/javascript" src="feed.js"></script> -->
+		<script src="src/jquery.min.js"></script>
+		<script src="src/main.js"></script>
+		<base target="_blank">
+	</head>
+	<body bgcolor="#FFF">
+		<div class="times-container">
+			<div class="box">
+				<div class="title">
+					<h1 style="text-align: center;">Total Dayify - Jack Hales</h1>
+				</div>
+			</div>
+			<!-- <div class="box">
+				<div class="inside">
+					<div class="progress">English - 21 days</div>
+				</div>
+			</div> -->
+		</div>
+
+		<div class="adjust">
+			<div class="operable operable-new">
+				New
+			</div>
+			<div class="operable operable-place-input not-visible">
+				<form method="post" id="form-new">
+					<h2 class="close-form" style="padding: 0; margin: 0; margin-bottom: 20px;">Set up a new countdown</h2>
+					<div class="half">
+						<span>Starting date (defaults to day)</span> <br/>
+						<input type="date" id="start" class="setToToday" /> <br/>
+					</div>
+					<div class="half">
+						<span>Due date</span> <br/>
+						<input type="date" id="finish" class="setToToday" /> <br/>
+					</div>
+					<input type="text" id="name" placeholder="Name of this sad, sad, day.." />
+					<input type="submit" value="Start counting 🤞" />
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

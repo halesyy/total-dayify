@@ -1,0 +1,18 @@
+{
+  "name": "Total Dayify",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "",
+  "browser_action": {
+		"default_icon": "icon.png",
+		"default_title": "Sick of assignments and due dates creeping up on you? Fix that with an all-in-one chrome app.",
+		"default_popup": "extension.html"
+	},
+  "permissions": [
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google.com; script-src 'self' https://code.jquery.com/jquery-3.4.1.min.js; object-src 'self'",
+  "icons": {
+    "128": "icon.png"
+  }
+}
