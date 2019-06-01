@@ -89,6 +89,14 @@ body
 //     transition: 0.3s
 //     transform: scale(1.03)
 
+.avatar
+  cursor: pointer
+  border-radius: 32px
+  transition: 0.3s
+  &:hover
+    transition: 0.3s
+    @extend .shadow
+
 .box
   @extend .shadow
   background: $backUpper
@@ -96,6 +104,7 @@ body
   border-radius: 6px
   padding: 10px
   .title
+    @include clearfix
     color: black
     h1
       padding: 0

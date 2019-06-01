@@ -9,6 +9,12 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
+$('body').on('click', 'a[target="_blank"]', function(e){
+    e.preventDefault();
+    chrome.tabs.create({url: $(this).prop('href'), active: false});
+    return false;
+});
+
 function deleteTimeFromId(idx) {
   const timeidx = idx;
 
