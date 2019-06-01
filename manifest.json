@@ -1,11 +1,11 @@
 {
-  "name": "Total Dayify",
-  "version": "0.1",
+  "name": "Day Lineup",
+  "version": "1.0",
   "manifest_version": 2,
-  "description": "",
+  "description": "Prepare yourself, prepare your day, prepare your life! Sick of assignments and due dates creeping up on you? Fix that with an all-in-one chrome app which has simplicty at the core of it's use-case.",
   "browser_action": {
 		"default_icon": "icon.png",
-		"default_title": "Sick of assignments and due dates creeping up on you? Fix that with an all-in-one chrome app.",
+		"default_title": "Prepare yourself, prepare your day, prepare your life! Sick of assignments and due dates creeping up on you? Fix that with an all-in-one chrome app which has simplicty at the core of it's use-case.",
 		"default_popup": "extension.html"
 	},
   "permissions": [
