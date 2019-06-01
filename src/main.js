@@ -111,6 +111,8 @@ $(document).ready(function(){
     event.preventDefault();
     const $start = $('#start'), $finish = $('#finish'), $name = $('#name');
     const start = $start.val(), finish = $finish.val(), name = $name.val();
+    $name.val('');
+
 
     // getting the current times, appending, then adding the new data in
     chrome.storage.sync.get({timeo_times: "notset"}, function(result) {
