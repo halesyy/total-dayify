@@ -1,11 +1,11 @@
 {
-  "name": "Day Lineup",
-  "version": "1.0",
+  "name": "Day Lineup: Track Days & Enhance Productivity",
+  "version": "1.0.1",
   "manifest_version": 2,
   "description": "Prepare yourself, prepare your day, prepare your life! But, take it day-by-day..",
   "browser_action": {
 		"default_icon": "icon.png",
-		"default_title": "Prepare yourself, prepare your day, prepare your life! Sick of assignments and due dates creeping up on you? Fix that with an all-in-one chrome app which has simplicty at the core of it's use-case.",
+		"default_title": "YOUR Total Day Lineup",
 		"default_popup": "extension.html"
 	},
   "permissions": [
