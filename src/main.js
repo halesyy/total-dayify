@@ -74,7 +74,8 @@ function notification_read(name=false) {
 // watcher for when the notif is clicked on
 $(document).on('click', '.notification', function(event){
   console.log("going to remove!");
-
+  notification_read();
+  $(this).fadeOut(250);
 });
 
 
