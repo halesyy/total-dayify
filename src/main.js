@@ -39,6 +39,45 @@ function deleteTimeFromId(idx) {
 
 }
 
+function notification(name=false) {
+  const notif = {
+    title: "What's new in 1.1.0?",
+    message: "Well, first of all I made these little dismissable notifications. Also: <ul><li>Cleaner app</li><li>Times are listed in priority ascending</li><li>Clicking 'home' next to a task adds a link to it</li></ul>"
+  };
+
+  chrome.storage.sync.get({"notif_110": "hasnt_seen"}, function(result){
+    if (result.notif_110 == "hasnt_seen") {
+      console.log("going to change that!");
+      // place in notification
+      $notification = `<div class="notification box">
+        <div class="inside">
+          <div class="notif-title">
+            ${notif.title} (click to remove)
+          </div>
+          <div class="notif-message">
+            ${notif.message}
+          </div>
+        </div>
+      </div>`;
+      $('.times-container').append($notification);
+    }
+    else {
+      // ignore
+    }
+  });
+}
+function notification_read(name=false) {
+  chrome.storage.sync.set({"notif_110": "seen"}, function(result){
+    console.log('Seen notification ' + result);
+  });
+}
+// watcher for when the notif is clicked on
+$(document).on('click', '.notification', function(event){
+  console.log("going to remove!");
+
+});
+
+
 function renderTimes() {
   $('.times-container > .box-time').remove();
   chrome.storage.sync.get({timeo_times: "notset"}, function(result) {
@@ -48,7 +87,19 @@ function renderTimes() {
       var times = result.timeo_times;
     }
     const today = new Date().getTime();
-
+    /*{
+      start: start,
+      end: finish,
+      name: name
+    }*/
+    times.sort(function(a, b){
+        var keyA = new Date(a.end),
+            keyB = new Date(b.end);
+        // Compare the 2 dates
+        if(keyA < keyB) return -1;
+        if(keyA > keyB) return 1;
+        return 0;
+    });
     // iterates through eahc
     for (timex in times) {
       // time.start, time.end, time.name
@@ -71,7 +122,21 @@ function renderTimes() {
 
       var displayName = `${time.name} - ${daysTill} days remaining`;
 
-      $place = $(`<div class="box box-time"><div class="inside"><div style="width: ${percentage}%;" class="progress"><div class="display-name-left">${name} <a href="#" class="delete-time" data-id="${timex}">x</a></div><div class="display-name-right">${daysTill} days remaining</div></div></div></div>`);
+      if (daysTill <= 1) var dayType = "day";
+      else var dayType = "days";
+
+      $place = $(`<div class="box box-time">
+            <div class="inside">
+              <div style="width: ${percentage}%;" class="progress">
+                <div class="display-name-left">
+                  ${name} <a href="#" class="delete-time" data-id="${timex}">x</a>
+                </div>
+                <div class="display-name-right">
+                  ${daysTill} ${dayType} remaining
+                </div>
+              </div>
+            </div>
+          </div>`);
       $('.times-container').append($place);
     }
   });
@@ -86,6 +151,7 @@ function closeAdjuster() {
 
 $(document).ready(function(){
 
+  notification(); // loading notifs if any
   renderTimes();
 
   $(document).on('click', '.delete-time', function(event){
@@ -131,6 +197,14 @@ $(document).ready(function(){
         start: start,
         end: finish,
         name: name
+      });
+      times.sort(function(a, b){
+          var keyA = new Date(a.end),
+              keyB = new Date(b.end);
+          // Compare the 2 dates
+          if(keyA < keyB) return -1;
+          if(keyA > keyB) return 1;
+          return 0;
       });
       chrome.storage.sync.set({timeo_times: times}, function() {
         console.log('Value is set to ' + times);
