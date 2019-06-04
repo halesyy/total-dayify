@@ -42,7 +42,7 @@ function deleteTimeFromId(idx) {
 function notification(name=false) {
   const notif = {
     title: "What's new in 1.1.0?",
-    message: "Well, first of all I made these little dismissable notifications. Also: <ul><li>Cleaner app</li><li>Times are listed in priority ascending</li><li>Clicking 'home' next to a task adds a link to it</li></ul>"
+    message: "Well, first of all I made these little dismissable notifications. Also: <ul><li>Cleaner app</li><li>Times are listed in priority ascending</li><li>Clicking 'home' next to a task adds a link to it</li><li>Added some neat animations hehe</li></ul>"
   };
 
   chrome.storage.sync.get({"notif_110": "hasnt_seen"}, function(result){
@@ -114,7 +114,13 @@ function renderTimes() {
         var link = "";
       }
 
-      const name = time.name;
+      var name = time.name;
+
+      // deciding whether or not to make name a link
+      if (link != "") {
+        name = `<a href="${link}" title="${link}" target="_blank">${name}</a>`;
+      }
+
       const endDate = new Date(time.end);
       const startDate = new Date(time.start);
       const endTimestamp = endDate.getTime();
@@ -136,14 +142,19 @@ function renderTimes() {
       else var dayType = "days";
 
       $place = $(`<div class="box box-time">
+            <div class="main-title">
+              ${name}
+              <div style="float: right;">
+                <a href="#" class="set-home time-button" data-link="${link}" data-id="${timex}" title="Set up a link (eg. Google Doc) to load when clicking on this task.">home</a>,
+                <a href="#" class="delete-time time-button" data-id="${timex}" title="Remove this time.">delete</a>
+              </div>
+            </div>
             <div class="inside">
               <div style="width: ${percentage}%;" class="progress">
                 <div class="display-name-left">
-                  ${name}
-                  <a href="#" class="delete-time time-button" data-id="${timex}" title="Remove this time.">delete</a> -
-                  <a href="#" class="set-home time-button" data-link="${link}" data-id="${timex}" title="Set up a link (eg. Google Doc) to load when clicking on this task.">home</a>
+                  <!--${name}-->
                 </div>
-                <div class="display-name-right">
+                <div class="display-name-right" title="Working hard or hardly working?">
                   ${daysTill} ${dayType} remaining
                 </div>
               </div>
@@ -182,9 +193,10 @@ $(document).ready(function(){
     // deleteTimeFromId(toDelete);
     // renderTimes();
     $this = $(this);
-    $parent = $this.parent().parent().parent().parent();
+    // $parent = $this.parent().parent().parent().parent();
+    $parent = $this.parent().parent().parent();
     $('.time-setting-input').remove(); // causing no duplicates
-    $parent.append(`<input type="text" data-id="${toDelete}" class="time-setting-input" />`);
+    $parent.append(`<input type="text" data-id="${toDelete}" value="${$this.attr('data-link')}" placeholder="Link to something related to getting this DONE e.g. Google Doc" class="time-setting-input" />`);
 
     return false;
   });
@@ -206,11 +218,14 @@ $(document).ready(function(){
 
 
       chrome.storage.sync.get({timeo_times: "notset"}, function(results){
-        var times = results.timeo_times;
+        const times = results.timeo_times;
         times[id].link = link;
         console.log(times);
         chrome.storage.sync.set({timeo_times: times}, function(results){
-          console.log('Value is set to ' + results);
+          // console.log('Value is set to ' + results);
+          $('.time-setting-input').remove();
+          renderTimes();
+
         });
       });
 

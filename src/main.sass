@@ -1,7 +1,7 @@
 $back: #2b2b2b
 $backUpper: #f4f4f4
 $progress: #ffd61e
-$progressBackground: #f1eaaa
+$progressBackground: #f7f2c9
 $blue: #B1EDE8
 
 @mixin clearfix()
@@ -23,16 +23,17 @@ body
   box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)
 
 .adjust-extended
-  transition: max-height 0.3s ease-out
-  max-height: 45vh
+  transition: max-height 0.25s ease-out
+  max-height: 45vh !important
 
 .not-visible
   display: none
 
 .adjust
+  transition: max-height 0.25s ease-out
   background: $progress
-  transition: all 0.3s !important
   bottom: 0
+  max-height: 55px
   position: absolute
   width: 100%
   display: flex
@@ -80,15 +81,16 @@ body
   @include clearfix
 
 .delete-time, .set-home
-  color: #545200
+  color: #c53649 !important
   font-weight: bold
   text-decoration: none
 
-// .box-time
-//   transition: 0.3s
-//   &:hover
-//     transition: 0.3s
-//     transform: scale(1.03)
+.box-time
+  position: relative
+  transition: 0.3s
+  &:hover
+    transition: 0.3s
+    transform: scale(1.03)
 
 .avatar
   cursor: pointer
@@ -104,6 +106,16 @@ body
   margin: 15px
   border-radius: 6px
   padding: 10px
+  .main-title
+    a
+      color: black
+      // font-weight: bold
+      text-decoration: none
+    padding-bottom: 10px
+    font-size: 14px
+
+
+
   .title
     @include clearfix
     color: black
@@ -157,3 +169,18 @@ ul
 
   cursor: pointer
   background: #ffb9b9
+
+
+
+.time-setting-input, .nice-input
+  width: calc(100% - 32px)
+  margin-top: 5px
+  @extend .shadow
+  font-family: "Source Code Pro", Arial
+  border-radius: 6px
+  font-size: 10px
+  border: 0
+  outline: 0
+  background: rgba(255,255,255,0.8)
+  padding: 8px 16px 8px 16px
+  text-align: center
