@@ -105,6 +105,15 @@ function renderTimes() {
     for (timex in times) {
       // time.start, time.end, time.name
       const time = times[timex];
+
+      // checking for a link attr
+      if ('link' in time) {
+        var link = time.link;
+      }
+      else {
+        var link = "";
+      }
+
       const name = time.name;
       const endDate = new Date(time.end);
       const startDate = new Date(time.start);
@@ -130,7 +139,9 @@ function renderTimes() {
             <div class="inside">
               <div style="width: ${percentage}%;" class="progress">
                 <div class="display-name-left">
-                  ${name} <a href="#" class="delete-time" data-id="${timex}">x</a>
+                  ${name}
+                  <a href="#" class="delete-time time-button" data-id="${timex}" title="Remove this time.">delete</a> -
+                  <a href="#" class="set-home time-button" data-link="${link}" data-id="${timex}" title="Set up a link (eg. Google Doc) to load when clicking on this task.">home</a>
                 </div>
                 <div class="display-name-right">
                   ${daysTill} ${dayType} remaining
@@ -162,6 +173,50 @@ $(document).ready(function(){
     deleteTimeFromId(toDelete);
     renderTimes();
     return false;
+  });
+
+  $(document).on('click', '.set-home', function(event){
+    event.preventDefault();
+    // console.log("Going to delete " + );
+    let toDelete = $(this).attr('data-id');
+    // deleteTimeFromId(toDelete);
+    // renderTimes();
+    $this = $(this);
+    $parent = $this.parent().parent().parent().parent();
+    $('.time-setting-input').remove(); // causing no duplicates
+    $parent.append(`<input type="text" data-id="${toDelete}" class="time-setting-input" />`);
+
+    return false;
+  });
+
+  $(document).on('keyup', '.time-setting-input', function(event){
+    if (event.which == 13) {
+      console.log("going to wait for time setter lol gotta go edit it and re-render");
+      console.log("oh also delete me the second its an enter");
+
+      // gotta:
+      // 1. get input
+      // 2. get the times var
+      // 3. access with respect to data-id
+      // 4. edit data-id piece to input
+      // 5. set
+      const link = $(this).val();
+      const id = $(this).attr('data-id');
+      console.log(`going to change ${id} to ${link}`);
+
+
+      chrome.storage.sync.get({timeo_times: "notset"}, function(results){
+        var times = results.timeo_times;
+        times[id].link = link;
+        console.log(times);
+        chrome.storage.sync.set({timeo_times: times}, function(results){
+          console.log('Value is set to ' + results);
+        });
+      });
+
+
+    }
+
   });
 
 
