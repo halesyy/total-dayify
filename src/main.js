@@ -172,8 +172,30 @@ function closeAdjuster() {
   $('.operable-place-input').addClass('not-visible');
 }
 
+function sortForSafety() {
+  chrome.storage.sync.get({timeo_times: "notset"}, function(results){
+    const times = results.timeo_times;
+    // times[id].link = link;
+    console.log("Sorted..");
+    times.sort(function(a, b){
+        var keyA = new Date(a.end),
+            keyB = new Date(b.end);
+        // Compare the 2 dates
+        if(keyA < keyB) return -1;
+        if(keyA > keyB) return 1;
+        return 0;
+    });
+    chrome.storage.sync.set({timeo_times: times}, function(results){
+      console.log("Saved sort..");
+
+    });
+  });
+
+}
+
 $(document).ready(function(){
 
+  sortForSafety(); // makes sure that the times are always in the correct order
   notification(); // loading notifs if any
   renderTimes();
 
