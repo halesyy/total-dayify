@@ -3,53 +3,39 @@
 	<head>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Roboto' rel='stylesheet' type='text/css'>
 		<link href='src/main.css' rel='stylesheet' type='text/css'>
+		<link href='src/jquery-ui.min.css' rel='stylesheet' type='text/css'>
 		<meta name="viewport" content="width=device-width" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>Tinkernut</title>
-		<!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
-		<!-- <script type="text/javascript" src="feed.js"></script> -->
+		<title>Day Linup</title>
 		<script src="src/jquery.min.js"></script>
-		<script src="src/main.js"></script>
+		<script src="src/jquery-ui.min.js"></script>
+
 		<base target="_blank">
 	</head>
-	<body bgcolor="#FFF">
-		<div class="times-container">
-			<div class="box">
-				<div class="title">
-					<h1 style="text-align: center;">
-						<span style="float: left; margin-left: 5px;">
-							Your Day Lineup<br/>
-							<small style=" font-size: 10px; position: absolute; left: 32px; margin-top: -5px;" title="Updated 5th of June, 2019">1.1.1</small>
-						</span>
-						<span style="float: right; font-size: 12px;">
-							<a href="https://stackoverflow.com/users/5782416/jack-hales?tab=profile" target="_blank" style="text-decoration: none; color: black;">
-								<span style="bottom: 11.5px; position: relative;">Made with 💖 by</span> <img class="avatar" src="pp.jpg" width="32" height="32" />
-							</a>
-						</span>
-					</h1>
-				</div>
-			</div>
-		</div>
-
-		<div class="adjust">
-			<div class="operable operable-new">
-				New Task
-			</div>
-			<div class="operable operable-place-input not-visible">
-				<form method="post" id="form-new">
-					<h2 class="close-form" style="padding: 0; margin: 0; margin-bottom: 20px;">Set up a new countdown</h2>
-					<div class="half">
-						<span>Starting date (defaults to day)</span> <br/>
-						<input type="date" id="start" class="setToToday" /> <br/>
-					</div>
-					<div class="half">
-						<span>Due date</span> <br/>
-						<input type="date" id="finish" class="setToToday" /> <br/>
-					</div>
-					<input type="text" id="name" placeholder="Name of this sad, sad, day.." />
-					<input type="submit" value="Start counting 🤞" />
-				</form>
-			</div>
+	<body bgcolor="#FFF" style="position: relative;">
+		<div class="box" style="margin-top: 15px">
+      <div class="title">
+        <h1 style="text-align: center;">
+          <span style="float: left; margin-left: 5px;">
+            Your
+            <select class="change-page">
+              <option value="pages/home-times" data-order="1" title="Your day-tracking">Day</option>
+              <option value="pages/home-welcome" data-order="2" title="To check out some details about a feature coming soon">Soon</option>
+            </select>
+            <!-- <a href="home-welcome.html" target="_homewelcome">test</a> -->
+            Lineup<br/>
+            <small style=" font-size: 10px; position: absolute; left: 32px; margin-top: -5px;" title="Updated 6th of June, 2019">2.0.0</small>
+          </span>
+          <span style="float: right; font-size: 12px;">
+            <a href="https://stackoverflow.com/users/5782416/jack-hales?tab=profile" target="_blank" style="text-decoration: none; color: black;">
+              <span style="bottom: 11.5px; position: relative;">Made with 💖 by</span> <img class="avatar" src="pp.jpg" width="32" height="32" />
+            </a>
+          </span>
+        </h1>
+      </div>
+    </div>
+		<div class="container">
 		</div>
 	</body>
+	<script src="src/main.js"></script>
 </html>

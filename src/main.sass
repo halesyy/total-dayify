@@ -3,6 +3,13 @@ $backUpper: #f4f4f4
 $progress: #ffd61e
 $progressBackground: #f7f2c9
 $blue: #B1EDE8
+$red: #c53649
+
+.main-color
+  color: $progress
+
+.main-dark-color
+  color: $red
 
 @mixin clearfix()
   &::after
@@ -81,7 +88,7 @@ body
   @include clearfix
 
 .delete-time, .set-home
-  color: #c53649 !important
+  color: $red !important
   font-weight: bold
   text-decoration: none
 
@@ -103,7 +110,7 @@ body
 .box
   @extend .shadow
   background: $backUpper
-  margin: 15px
+  margin: 0 15px 15px 15px
   border-radius: 6px
   padding: 10px
   .main-title
@@ -116,12 +123,31 @@ body
 
 
 
+
   .title
     @include clearfix
     color: black
-    h1
+    .change-page
+      font-size: 22.5px
+      font-weight: bold
+      border: 0
+      // background: rgba(255, 255, 255, 0.6)
+      background: transparent
+      outline: 0
+      cursor: pointer
+      color: black
+      font-family: "Segoe UI", Arial
+    h1, h2
       padding: 0
       margin: 0
+  .content
+    p
+      text-align: justify
+    a
+      color: white
+      background: $red
+      border-radius: 6px
+      padding: 3px 6px 3px 6px !important
   .inside
     font-size: 20px
     // padding: 15px
@@ -184,3 +210,16 @@ ul
   background: rgba(255,255,255,0.8)
   padding: 8px 16px 8px 16px
   text-align: center
+
+.times-container, .page
+  min-height: 100vh
+
+.times-container
+  padding-bottom: 60px
+
+.ui-effects-placeholder
+  position: relative !important
+  overflow: visible !important
+  margin: 50px !important
+  padding: 20px !important
+  clip: none !important
